@@ -3,14 +3,24 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "w": "webpack --mode development",
+    "r": "webpack-dev-server --mode development",
+    "build": "webpack --mode production"
+  },
   "dependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.18.0",
     "@babel/preset-react": "^7.17.12",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "style-loader": "^3.3.1",
     "webpack": "^5.72.1",
-    "webpack-cli": "^4.9.2"
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.18.0"

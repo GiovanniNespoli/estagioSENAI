@@ -5,3 +5,9 @@ yarn add @babel/core @babel/preset-react webpack webpack-cli
 
 3º transpilação de js para o browser
 yarn babel src/index.js --out-file public/bundle.js
+yarn add babael
+yarn webpack --mode development
+yarn add webpack-dev-server
+
+CSS
+yarn add style-loader css-loader

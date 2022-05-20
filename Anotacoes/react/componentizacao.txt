@@ -1,0 +1,4 @@
+O conceito mais famoso bbs!!
+
+-- Dividir a nossa aplicação em componentes  ( o melhor uso é caso a gnt crie algo que irá
+						se repetir )

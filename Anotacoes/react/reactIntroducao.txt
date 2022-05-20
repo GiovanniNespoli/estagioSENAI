@@ -12,7 +12,6 @@ back end -> regras de negocio
 front end -> interface
 
 programação declarativa 
- 
 
 JSX JS + XML
 HTML dentro do JS
@@ -27,7 +26,16 @@ codigo que é consumido pela nossa aplicação
 ensina tb ao JS como importar os arquivos em CSS, img e etc
 Live reload com Webpack DEV Server
 
- Babel : converter { transpilar } código do react para um
- código que o brwser entenda
- Webpack : Pra cada tipo de arquivos vou converter o código de uma
- maneira diferente
+Babel : converter { transpilar } código do react para um
+código que o brwser entenda
+Webpack : Pra cada tipo de arquivos vou converter o código de uma
+maneira diferente
+
+/**
+ * Babel : converter { transpilar } código do react para um
+ * código que o browser entenda
+ * Webpack : Pra cada tipo de arquivos vou converter o código de uma
+ * maneira diferente
+ * 
+ * Loaders : babel-loader, css-loader, 
+ */
