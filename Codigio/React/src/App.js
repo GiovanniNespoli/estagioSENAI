@@ -23,11 +23,16 @@ export default function App()
         <> 
             <Header title="homepage" />
 
+            <img width={50} src={gato}/>
+
             <ul>
                 {projects.map(x => <li key={x}>{x}</li>)}
             </ul>
 
             <button type="button" onClick={handleAddProject}>Adicionar projeto</button>
+        
+            
+        
         </>
     );
 }
