@@ -1,0 +1,3 @@
+QUERY PARAMS (parametros GET) -> filtros e paginação
+ROUTE PARAMS -> Identificar recursos
+REQUEST BODY -> Conteudo na hora de criar/editar

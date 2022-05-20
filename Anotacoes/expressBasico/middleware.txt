@@ -1,0 +1,10 @@
+Interceptador de requisições e altera os dados da requisição,
+interrompe totalmente a requisição e 
+também usado para verificação da requisição
+
+1º interrompe 
+2º valida
+3º manda para requisição ou cancela totalmente
+
+maior conceito do express
+todo porj em express é baseado em middleware

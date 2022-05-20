@@ -1,0 +1,5 @@
+GET -> buscar uma informação no back
+POST -> inseri uma informação no back
+PUT -> atualiza vários dados de uma vez no back
+PATCH -> atualiza um dado de uma vez no back
+DELETE -> deleta uma informação no back

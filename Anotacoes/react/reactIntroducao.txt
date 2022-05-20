@@ -1,0 +1,33 @@
+Biblioteca de construção de interfaces, usado para construções de single-page Applications (SPA)
+pode se chamar de framework
+
+React -> biblioteca de contrução de interface
+ReactJS -> comportamento do React no browser por exemplo o comportamento com a ReactDOM
+
+Vantagens REACT
+Organização do código (componentização)
+
+Divisão de responsabilidades
+back end -> regras de negocio
+front end -> interface
+
+programação declarativa 
+ 
+
+JSX JS + XML
+HTML dentro do JS
+
+Babel / Webpack
+
+Browser não entende todo esse código;
+então o Babel converte o COD JS de uma forma que o browser entenda
+
+Webpack cria o bundle que transforma tudo em um único 
+codigo que é consumido pela nossa aplicação
+ensina tb ao JS como importar os arquivos em CSS, img e etc
+Live reload com Webpack DEV Server
+
+ Babel : converter { transpilar } código do react para um
+ código que o brwser entenda
+ Webpack : Pra cada tipo de arquivos vou converter o código de uma
+ maneira diferente

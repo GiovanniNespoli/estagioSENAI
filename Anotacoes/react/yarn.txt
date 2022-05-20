@@ -1,0 +1,7 @@
+1° yarn init -y
+
+2º para babel e webpack 
+yarn add @babel/core @babel/preset-react webpack webpack-cli
+
+3º transpilação de js para o browser
+yarn babel src/index.js --out-file public/bundle.js
