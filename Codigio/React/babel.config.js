@@ -8,4 +8,9 @@ module.exports = {
         '@babel/preset-react'   //transpila o codigo html dentro do JS
                                 //para que o browser entenda
     ],
+    plugins: [
+        '@babel/plugin-transform-runtime' //babel por padrão n le a estrutura
+                                         //async await, então usamos esse
+                                         //plugin para libermos
+    ]
 };

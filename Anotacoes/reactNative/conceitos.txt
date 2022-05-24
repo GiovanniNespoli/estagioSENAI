@@ -1,0 +1,9 @@
+React Native -> Versão do react para dev mobile
+
+Multiplataforma ( android / iphone ) podendo também manipular em cada plataforma
+
+converte o cod em interface hibrida
+o cod n é totalmete transpilada pois ele injeta uma dependencia no nosso cell e assim
+ele acaba entendendo o cod
+
+Não é usado HTML mas sim componentes proprios do Native

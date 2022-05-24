@@ -1,0 +1,8 @@
+Linguagem baseada em JS, o diferencial é as Tipagems
+
+possui babel, node e o browser n entendem TS então é
+convertido para JS
+
+sem o typeScript o nosso editor n entende as informações
+(Intellisense)
+

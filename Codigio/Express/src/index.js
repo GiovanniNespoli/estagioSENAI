@@ -1,15 +1,17 @@
 
 const express = require('express');
-const { uuid, isUuid } = require('uuidv4')
+const { uuid, isUuid } = require('uuidv4');
+const cors = require('cors');
 
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 /**
  *  Tipos de parâmetros
- * 
+ *   
  *  QUERY PARMS : filtros e paginação (GET especifico),
  *  ROUTE PARMS : Identificar os recursos (deletar/atualizar),
  *  REQUEST BODY  : conteudo na criação e edição dos dados (JSON)
@@ -52,7 +54,7 @@ app.use(logRequests);
 app.get('/express', (request, response) =>
 {
     /**Filtros usando query parms */
-    return response.json(projects);
+    return response.json(projects);  
 });
 
 app.get('/express/buscar', (request,response) =>
@@ -64,7 +66,7 @@ app.get('/express/buscar', (request,response) =>
     /** IF ternário*/
     /** array+filter*/
     /** includes : metodo que verifica o title buscado com o title do array*/
-    const results = Title ? projects.filter(x => x.Title.includes(Title)) : projects;
+    const results = Title ? projects.filter(x => x.Title.includes(Title)) : projects    
 
     return response.json(results);
 });
@@ -76,17 +78,15 @@ app.post('/express/insert', (request, response) =>
     /**desestruturamos os cod */
     const {Title,Owner} = request.body;
 
-
+    
     /**cadastramos um proj */
     /**usando a biblio uuidv4 para um cadastro auto do id */
     const newProject = { id: uuid(), Title, Owner }; 
 
-    /**push metedo de cadastro */
+    /**push metedo de cadastro */    
     projects.push(newProject);
 
-    return response.json([
-        'The new project has been created'
-    ]);
+    return response.json(newProject);
 });
 
 /**PUT -> atualiza uma informação 
@@ -144,6 +144,6 @@ app.delete('/express/delete/:id', validadeProjectId , (request,response) =>
 });
 
 
-app.listen(3333, () => {
+app.listen(3333, () => {  
     console.log('RUN!!!!!!!');
 });

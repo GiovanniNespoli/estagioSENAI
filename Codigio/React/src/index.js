@@ -1,6 +1,7 @@
-import React from "react";
-import { render } from 'react-dom';
+import React from 'react';
+import { createRoot} from 'react-dom/client';
 import App from './App';
+const container = document.getElementById('app');
+const root = createRoot(container);
 
-//JSX = html dentro do JS
-render(<App/>, document.getElementById("app"));
+root.render(<App tab="home"/>)

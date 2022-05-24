@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
+import api from './services/api';
+
 import Header from './components/header';
+
 import './App.css';
-import gato from './assets/gato.jpeg'
+
 
 /**Component -> Usando quando algo é repetido na interface
  * Propriedade -> PROPSSSSS
@@ -10,28 +13,43 @@ import gato from './assets/gato.jpeg'
 
 export default function App()
 {
-    const [projects, setProjects] = useState(['DEV', 'Estudo']);
+    const [projects, setProjects] = useState([]);
     //useState retorna um array
 
-    function handleAddProject()
+    //array de dependencias
+    useEffect(() => {
+        api.get('/express').then(response => {
+            setProjects(response.data)
+        })
+    }, [ ]);
+
+    
+
+    async function handleAddProject()
     {
-        setProjects([...projects, `New Project ${Date.now()}`]);
-        console.log(projects)
+        const response = await api.post('/express/insert', 
+        {
+            Title: `New project ${Date.now()}`,
+            Owner: "Giovanni Nespoli"
+        })
+        console.log(response.data)
+        setProjects([...projects , response.data])
+        
     };
+
+    
 
     return(
         <> 
             <Header title="homepage" />
 
-            <img width={50} src={gato}/>
-
             <ul>
-                {projects.map(x => <li key={x}>{x}</li>)}
+                {projects.map(proj => 
+                    <li key={proj.id}>{proj.Title}</li>
+                )}
             </ul>
 
             <button type="button" onClick={handleAddProject}>Adicionar projeto</button>
-        
-            
         
         </>
     );

@@ -1,13 +1,17 @@
 {
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.1",
     "nodemon": "^2.0.16",
     "uuidv4": "^6.2.13",
     "yarn": "^1.22.18"
   },
-  "name": "Express",
+  "name": "express",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "index": "nodemon ./src/index.js"
+  "scripts": {
+    "r" : "nodemon ./src/index.js"
+  }
+  
 }
