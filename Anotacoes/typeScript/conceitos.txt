@@ -6,3 +6,5 @@ convertido para JS
 sem o typeScript o nosso editor n entende as informações
 (Intellisense)
 
+Faz verificação de erros durante a digitção do código através do intellisense
+Ou seja ele server para melhoras a produtividade e garantir a construção de apliacações mais seguras

@@ -4,14 +4,18 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@types/express": "^4.17.13",
     "express": "^4.18.1",
-    "ts-node-dev": "^1.1.8",
+    "ts-node-dev": "1.0.0-pre.44",
+    "tsc": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "ts-node-dev": "1.0.0-pre.44",
     "typescript": "^4.7.2"
   },
   "scripts": {
-    "r": "node ./dist/server.js",
     "build": "tsc",
-    "dev:server" : "ts-node-dev src/server.ts"
+    "r": "node dist/server.js",
+    "dev:server": "ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/server.ts"
   }
 }
