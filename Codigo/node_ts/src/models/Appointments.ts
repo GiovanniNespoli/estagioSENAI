@@ -1,5 +1,11 @@
 import { uuid } from "uuidv4";
 
+// interface AppointmentInterface
+// {
+//     provider : string,
+//     date : Date;
+// }
+
 export default class Appointment{
     id: string;
 
@@ -7,10 +13,11 @@ export default class Appointment{
 
     date: Date;
 
-    constructor(prov: string, dt: Date)
+    //<> => parametros de tipagem
+    constructor({provider, date} : Omit<Appointment, 'id'>)
     {
         this.id         = uuid();
-        this.provider   = prov;
-        this.date       = dt
+        this.provider   = provider;
+        this.date       = date
     }
 }

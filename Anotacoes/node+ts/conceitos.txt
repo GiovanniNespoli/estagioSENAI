@@ -1,0 +1,7 @@
+Models -> Domains
+Route -> Receber uma requisição, chamar outro arquivo e devolver uma resposta
+Repository -> Tem a função de manipular os dados e recebidos e mandar para as routes
+services -> uma classe com uma regra de negocio
+
+SOC - > Separation of conscience
+DTO -> Data transfer Object = Passar um dado de um arquivo para o outro

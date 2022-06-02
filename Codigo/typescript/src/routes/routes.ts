@@ -4,7 +4,7 @@ import createUser from "../services/createUser";
 export function helloWorld(request: Request, response: Response)
 {
     const user = createUser({
-        email : 'Giovanni',
+        email : 'Giovanni@gmail.com',
         passworld : '1234',
         techs : [
             'React',
@@ -15,8 +15,6 @@ export function helloWorld(request: Request, response: Response)
                 experience : 10
             }]
     });
-
-
 
     return response.json(user);
 };
