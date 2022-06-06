@@ -1,0 +1,17 @@
+Docker -> criação de ambientes isolados(container) -> 	são ambientes que não vão interferir 
+							no funcionamento de outras tecnologias;
+
+
+Containers expõe portas para comunicação;
+
+
+CONCEITOS : 
+
+Imagem -> serviço disponivel do docker -> 	tecnologias que conseguimos
+						colocar em container
+
+Container -> instancia de uma imagem
+
+Docker Registry -> onde estão todas as imagens
+
+DockerFile -> receita de como montar uma imagem

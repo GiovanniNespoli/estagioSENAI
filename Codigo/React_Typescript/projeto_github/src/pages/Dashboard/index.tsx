@@ -1,5 +1,5 @@
 import React, {FormEvent, useState, useEffect} from "react";
-import { FiChevronRight } from 'react-icons/fi'
+import { FiChevronRight } from 'react-icons/fi';
 import { Link } from "react-router-dom";
 import api from "../../services/api";
 
@@ -60,6 +60,8 @@ const Dashboard : React.FC = () =>
 
             const response = await api.get<Repository>(`repos/${newRepo}`);
             const repository = response.data;
+
+            console.log(repository);
 
             setRepositories([...repositories, repository]);
             setNewRepo('');

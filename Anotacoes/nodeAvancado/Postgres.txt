@@ -1,0 +1,1 @@
+MIGRATIONS ->  Tipo um git, para a alterações nop banco de dados 
