@@ -6,6 +6,7 @@ import { Router } from 'express';
  * parseISO -> 
  */
 import { parseISO } from 'date-fns';
+import { getCustomRepository } from 'typeorm';
 
 /**Criamos um modelo para evitar a repetição de uma criação de uma interface a cada 
  * file de appointment
@@ -15,24 +16,27 @@ import AppointmentsRepository from '../repositories/appointmentsRepository';
 
 const appointmentsRouter = Router();
 
-const appointmentsRepository = new AppointmentsRepository();
-
-appointmentsRouter.get('/', (request, response) => 
+appointmentsRouter.get('/', async (request, response) => 
 {
-    const list = appointmentsRepository.listAll();
+    const appointmentsRepository = getCustomRepository(AppointmentsRepository);
+
+    const list = await appointmentsRepository.find();
     return response.json(list);
 });
 
-appointmentsRouter.post('/', (request, response) => 
+appointmentsRouter.post('/', async (request, response) => 
 {
     try {
+
+        
+
         const { provider, date } = request.body;
 
         const dateISO = parseISO(date); 
 
-        const createAppointments = new CreateAppointmentService(appointmentsRepository);
+        const createAppointments = new CreateAppointmentService();
    
-        const appointments = createAppointments.execute({date : dateISO, provider : provider})
+        const appointments = await createAppointments.execute({date : dateISO, provider : provider})
 
         return response.json(appointments);
 

@@ -1,4 +1,10 @@
-import { uuid } from "uuidv4";
+import {    Entity, 
+            Column,
+            PrimaryGeneratedColumn, 
+            CreateDateColumn, 
+            UpdateDateColumn, 
+            ManyToOne,
+            JoinColumn  } from "typeorm";
 
 // interface AppointmentInterface
 // {
@@ -6,18 +12,28 @@ import { uuid } from "uuidv4";
 //     date : Date;
 // }
 
+import User from './user';
+
+@Entity('appointments') //decoreitor => apenas no typeScript
 export default class Appointment{
+
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    provider: string;
+    @Column()
+    provider_id: string;
 
+    @ManyToOne(() => User)
+    @JoinColumn({name : 'provider_id'})
+    provider: User;
+
+    @Column('timestamp with time zone')
     date: Date;
 
-    //<> => parametros de tipagem
-    constructor({provider, date} : Omit<Appointment, 'id'>)
-    {
-        this.id         = uuid();
-        this.provider   = provider;
-        this.date       = date
-    }
+    @CreateDateColumn()
+    created_at: Date;
+
+    @UpdateDateColumn()
+    updated_at: Date;
+    
 }

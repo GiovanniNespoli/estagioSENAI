@@ -1,55 +1,20 @@
+import {EntityRepository, Repository} from 'typeorm'
+
 import Appointment from "../models/Appointments";
-import { isEqual } from "date-fns";
 
-//Data transfer Object
-
-interface createAppointmentsDTO
-{
-    provider    : string,
-    date        : Date;
-}
-
-export default class AppointmentsRepository {
-    /**variavel privada passando o array */
-    private appointments : Appointment[];
-
-    /**metedo construtor para termos acesso a variavel */
-    constructor(){
-        this.appointments = [];
-    }
+@EntityRepository(Appointment)
+export default class AppointmentsRepository extends Repository<Appointment> {
 
     /**
-     * metodo de listagem
+     * Toda vez em que criamos uma função async await
+     * o retorno vira uma promise => Promise<Appointments | null>
+     * .then(response => )
      */
-    public listAll() : Appointment[]
+    public async findByDate(date : Date) : Promise<Appointment | null>
     {
-        return this.appointments;
-    }
-
-    /**metodo de criacao 
-     * : -> é o retorno do nosso metodo
-     * 
-     * {} -> conceito de DTO, desestruturamos para ter o acesso a interface,
-     * uma estrutura de parametros nomeados
-     */
-    public create({provider, date} : createAppointmentsDTO) : Appointment
-    {
-        const appoit = new Appointment({provider, date});
-
-        this.appointments.push(appoit);
-
-        return appoit;
-    }
-    /**metodo de achar o id dentro do ID */
-    public findByDate(date : Date) : Appointment | null
-    {
-        /**1º o parametro
-        * ou seja o dado
-        * que iremos
-        * comparar
-        */
-        const findDate = this.appointments.find(x => 
-        isEqual(date, x.date));
+        const findDate = await this.findOne({
+            where : { date },
+        });
 
         return findDate || null;
     }
