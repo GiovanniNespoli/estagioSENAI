@@ -6,14 +6,14 @@ import AppointmentsRepository from "../repositories/appointmentsRepository";
 
 
 interface RequestDTO {
-    provider : string,
+    provider_id : string,
     date : Date;
 }
 
 export default class CreateAppointmentService
 {
 
-    public async execute({date, provider}: RequestDTO) : Promise<Appointment>
+    public async execute({date, provider_id}: RequestDTO) : Promise<Appointment>
     {
         const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 
@@ -36,7 +36,7 @@ export default class CreateAppointmentService
          * tratado para o cadastro
          */
         const newAppoints = appointmentsRepository.create({
-            provider : provider,
+            provider_id : provider_id,
             date : parsedDate
         });
 

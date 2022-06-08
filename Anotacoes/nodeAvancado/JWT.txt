@@ -1,0 +1,3 @@
+JWT -> Metodologia de autenticação 
+JSON WEB TOKEN !!!
+
