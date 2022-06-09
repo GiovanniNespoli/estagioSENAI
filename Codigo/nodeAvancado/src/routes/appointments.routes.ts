@@ -35,8 +35,6 @@ appointmentsRouter.post('/', async (request, response) =>
 {
     try {
 
-        
-
         const { provider_id, date } = request.body;
 
         const dateISO = parseISO(date); 
@@ -48,7 +46,7 @@ appointmentsRouter.post('/', async (request, response) =>
         return response.json(appointments);
 
     } catch (err) {
-        return response.status(400).json('This appointment is already booked');
+        return response.status(400).json(err.message);
     }
 });
 

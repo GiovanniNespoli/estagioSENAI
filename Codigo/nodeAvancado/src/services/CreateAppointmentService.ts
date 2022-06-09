@@ -27,7 +27,7 @@ export default class CreateAppointmentService
         */
         const findAppintInSameDate = await appointmentsRepository.findByDate(parsedDate);
     
-        if ( findAppintInSameDate !== null ) {
+        if ( findAppintInSameDate ) {
             throw Error('This appointment is already booked');
         };
     

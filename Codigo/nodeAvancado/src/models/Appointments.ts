@@ -6,12 +6,6 @@ import {    Entity,
             ManyToOne,
             JoinColumn  } from "typeorm";
 
-// interface AppointmentInterface
-// {
-//     provider : string,
-//     date : Date;
-// }
-
 import User from './user';
 
 @Entity('appointments') //decoreitor => apenas no typeScript
