@@ -1,0 +1,2 @@
+Decorator ->    declaração que atrela a uma classe e metodos com o objetivo de 
+		ampliar as funcionalidades

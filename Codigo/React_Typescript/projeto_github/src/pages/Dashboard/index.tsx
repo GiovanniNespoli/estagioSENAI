@@ -41,7 +41,7 @@ const Dashboard : React.FC = () =>
     
     useEffect(() => {
         localStorage.setItem('@GithubExplorer:repositories', JSON.stringify(repositories));
-    }, [repositories])
+    }, [repositories]);
 
     //add um repositorio
     //Precisamos consumir a api do github e dps add no state

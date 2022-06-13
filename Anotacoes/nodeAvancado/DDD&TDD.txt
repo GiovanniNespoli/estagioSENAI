@@ -1,0 +1,17 @@
+DDD -> Domain Driven Design
+( metodologia ágil para a organização de arquivos uso ideal para projetos grandes) 
+/ apenas back
+
+TDD -> Test Driven Development
+( Metodologia de criar testes antes de criar a funcionalidade )
+back / front
+
+LISKOV SUBSTITUTION PRINCIPLE ->
+
+Diz q as camadas que são integrações com outras bibliotecas ( libs / BD ) podem ser
+substituidas definindo um conjunto de regras
+
+DEPENDENCY INVERSION PRINCIPLE -> 
+
+
+Ao inves do services saber qual rep estamos usando invertermos

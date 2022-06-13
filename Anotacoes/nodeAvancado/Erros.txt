@@ -1,0 +1,1 @@
+Exception Handling -> Tratamento de erros na nossa apliação.

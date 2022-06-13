@@ -1,0 +1,2 @@
+Modules ( domínio ) -> camada de regra de negocio da nossa aplicação
+infra -> comunicação com o exterior da nossa aplicação ( libs, ferramentas e etc )
