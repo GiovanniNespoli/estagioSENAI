@@ -1,0 +1,4 @@
+Container -> ele carrega o service que colocamos um @injectable (@ = decorator ),
+ai ele entra no nosso construtor da service e verifica se necessita de uma dependencia
+então entra no container e verifica se há alguma dependencia cadastrada, se tiver retorna
+uma instancia da classe passada no container

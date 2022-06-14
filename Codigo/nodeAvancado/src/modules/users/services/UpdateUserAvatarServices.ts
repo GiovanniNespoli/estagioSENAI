@@ -1,3 +1,4 @@
+import { inject, injectable } from 'tsyringe';
 
 import path from 'path';
 import fs from 'fs';
@@ -12,9 +13,11 @@ interface IRequest {
     avatarFileName : string | undefined
 }
 
-
+@injectable()
 export default class UpdateUserAvatarService{
-    constructor(private usersRepository: IUserRepository){}
+    constructor(
+        @inject('UserRepository')
+        private usersRepository: IUserRepository){}
 
     public async execute({ id, avatarFileName} : IRequest) : Promise<User>
     {

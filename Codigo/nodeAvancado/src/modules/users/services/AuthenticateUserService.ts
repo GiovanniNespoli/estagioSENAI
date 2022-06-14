@@ -1,8 +1,9 @@
 
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import authConfig from '@config/auth';
+import { injectable, inject} from 'tsyringe';
 
+import authConfig from '@config/auth';
 import Users from '@modules/users/infra/typeorm/entities/user';
 import AppError from '@shared/errors/AppError';
 import IUsersRepository from '../repositories/IUsersRepository';
@@ -14,9 +15,11 @@ interface IRequest {
 }
 
 
-
+@injectable()
 export default class AuthenticateUserService {
-    constructor(private userRepository: IUsersRepository){}
+    constructor(
+        @inject('UserRepository')
+        private userRepository: IUsersRepository){}
 
     public async execute({email,password} : IRequest) : Promise<{user : Users } & {token : string}>
     {
