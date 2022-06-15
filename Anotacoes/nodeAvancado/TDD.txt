@@ -1,0 +1,26 @@
+Testes automatizados !!
+
+garantem que a nossa aplicação continue funcionando independente do número de 
+funcionalidades e do número de devs no time
+
+1 -> Teste unitários =
+	
+* testam funcionalidades específicas da nossa aplicação ( precisam ser funções puras )
+{ Funções puras = não dependem de outras partes da nossa aplicação ou externas } 
+
+2 -> Teste de integração = 
+
+* Testam uma funcionalidade completa, passando por várias camadas da aplicação, fazendo o fluxo completo
+
+Ex Cadastro de usuario=> Route -> controller -> Serviço -> Repositorio -> Serviço -> controller -> Route
+
+3 -> Teste E2E -> End to End
+
+* Teste que simulam a ação do usuário dentro da nossa aplicação
+
+{ Teste usado mais para interfaces ( Front-End ) 
+
+
+TDD => Test Driven Development 
+
+Garantem que os nosso coódigos estão funcionando!!

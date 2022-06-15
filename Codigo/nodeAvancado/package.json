@@ -13,6 +13,7 @@
     "multer": "^1.4.5-lts.1",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
+    "ts-jest": "27.0.3",
     "ts-node-dev": "^2.0.0",
     "tsyringe": "4.1.0",
     "typeorm": "0.2.37",
@@ -23,10 +24,12 @@
     "start": "ts-node src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "gomigration": "ts-node-dev ./node_modules/typeorm/cli.js migration:run",
-    "deletemigration": "ts-node-dev ./node_modules/typeorm/cli.js migration:revert"
+    "deletemigration": "ts-node-dev ./node_modules/typeorm/cli.js migration:revert",
+    "test": "jest"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/jest": "^28.1.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/multer": "^1.4.7",
     "@types/node": "^17.0.41",
@@ -39,6 +42,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
     "i": "^0.3.7",
+    "jest": "^28.1.1",
     "paths": "^0.1.1",
     "prettier": "^2.6.2",
     "ts-node": "10.8.1",
