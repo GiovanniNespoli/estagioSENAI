@@ -4,6 +4,7 @@ import { inject, injectable } from "tsyringe";
 import Appointment from "@modules/appointments/infra/typeorm/entities/Appointments";
 import IAppointmentRepository from '../repositories/IAppointmentsRepository';
 import AppError from '@shared/errors/AppError';
+import AppointmentsRepository from '@modules/appointments/infra/typeorm/repositories/appointmentsRepository';
 
 
 interface IRequestDTO {
@@ -15,7 +16,7 @@ interface IRequestDTO {
 export default class CreateAppointmentService
 {
     constructor(
-        @inject('AppoitmentsRepository')
+        @inject('AppointmentsRepository')
         private appointmentsRepository: IAppointmentRepository){}
 
     public async execute({date, provider_id}: IRequestDTO) : Promise<Appointment>{

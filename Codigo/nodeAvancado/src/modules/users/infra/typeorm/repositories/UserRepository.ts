@@ -40,6 +40,4 @@ export default class UsersRepository implements IUsersRepository {
         return this.ormRepository.save(user);
     }
 
-
-
 };
