@@ -50,6 +50,7 @@ describe('SendForgotPasswordEmail', () => {
                 email: 'gio@gmail.com'
             }),
         ).rejects.toBeInstanceOf(AppError);
+        
     });
 
     it('Should be able to send a recuperation email to the user', async ()=> {
