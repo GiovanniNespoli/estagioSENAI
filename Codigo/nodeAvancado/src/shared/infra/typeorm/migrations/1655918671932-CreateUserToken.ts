@@ -7,16 +7,11 @@ export default class CreateUserToken1655918671932 implements MigrationInterface 
             new Table({
                 name: 'user_tokens',
                 columns: [
-                    { name: 'id',type: 'uuid', isPrimary: true, generationStrategy: 'uuid', default: 'uuid_generate_v4()',
-                    },
-                    { name: 'token', type: 'uuid', generationStrategy: 'uuid', default: 'uuid_generate_v4()',
-                    },
-                    { name: 'user_id', type: 'uuid',
-                    },
-                    { name: 'created_at', type: 'timestamp', default: 'now()',
-                    },
-                    { name: 'updated_at', type: 'timestamp', default: 'now()',
-                    },
+                    { name: 'id',type: 'uuid', isPrimary: true, generationStrategy: 'uuid', default: 'uuid_generate_v4()', },
+                    { name: 'token', type: 'uuid', generationStrategy: 'uuid', default: 'uuid_generate_v4()', },
+                    { name: 'user_id', type: 'uuid', },
+                    { name: 'created_at', type: 'timestamp', default: 'now()', },
+                    { name: 'updated_at', type: 'timestamp', default: 'now()', },
                 ],
                 foreignKeys: [
                     {

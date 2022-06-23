@@ -6,7 +6,9 @@ module.exports = {
     password: "docker",
     database: "gostack_gobarber",
     entities: [
-        "./src/modules/**/infra/typeorm/entities/*.ts"
+        "./src/modules/appointments/infra/typeorm/entities/Appointments.ts",
+        "./src/modules/users/infra/typeorm/entities/user.ts",
+        "./src/modules/users/infra/typeorm/entities/UserToken.ts",
     ],
     migrations: [
         "./src/shared/infra/typeorm/migrations/*.ts"

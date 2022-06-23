@@ -16,7 +16,7 @@ interface IRequest {
 export default class CreateUserService {
 
     constructor(
-        @inject('UserRepository')
+        @inject('UsersRepository')
         private userRepository: IUsersRepository,
 
         @inject('HashProvider')

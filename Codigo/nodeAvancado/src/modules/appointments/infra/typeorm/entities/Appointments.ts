@@ -12,7 +12,8 @@ import {    Entity,
 //     date : Date;
 // }
 
-import User from '@modules/users/infra/typeorm/entities/user';
+// import User from '@modules/users/infra/typeorm/entities/user';
+import User from '../../../../users/infra/typeorm/entities/user';
 
 @Entity('appointments') //decoreitor => apenas no typeScript
 export default class Appointment{

@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import IUsersRepository from "../repositories/IUsersRepository";
-import IMailProvider from '@shared/container/providers/MailProvider/models/IMairlProvider';
+import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 import IUserTokenRepository from "../repositories/IUserTokenRepository";
 
 import AppError from "@shared/errors/AppError";
@@ -31,9 +31,12 @@ export default class SendForgotPasswordEmailService {
             throw new AppError('User does not exists')
         }
 
-        await this.userTokenRepository.generate(checkUserExists.id)
+        const {token} = await this.userTokenRepository.generate(checkUserExists.id)
 
-        this.mailProvider.sendMail(email, 'pedido de recuperação recebido')
+        await this.mailProvider.sendMail(
+            email, 
+            `pedido de recuperação recebido ${token}`
+            );
     }
 
 }

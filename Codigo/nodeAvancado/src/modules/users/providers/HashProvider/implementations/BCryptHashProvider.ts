@@ -10,3 +10,4 @@ export default class BCryptHashProvider implements IHashProvider {
         return compare(payload, hashed);
     }
 }
+
