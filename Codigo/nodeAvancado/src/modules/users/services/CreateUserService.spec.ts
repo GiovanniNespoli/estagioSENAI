@@ -4,16 +4,23 @@ import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import CreateUserService from './CreateUserService';
 
-describe('CreateUser', () => {
-    it('Should be able to create a new user', async () => {
-        const fakeUsersRepository = new FakeUsersRepository();
-        const fakeHashProvider = new FakeHashProvider();
+let fakeUsersRepository : FakeUsersRepository;
+let fakeHashProvider : FakeHashProvider;
+let createUser : CreateUserService;
 
-        const createUser = new CreateUserService(
+describe('CreateUser', () => {
+
+    beforeEach(() => {
+        fakeUsersRepository = new FakeUsersRepository();
+        fakeHashProvider = new FakeHashProvider();
+
+        createUser = new CreateUserService(
             fakeUsersRepository,
             fakeHashProvider
         );
+    });
 
+    it('Should be able to create a new user', async () => {
         const newUser = await createUser.execute({
             name: 'Giovanni',
             email: 'gio@gmail.com',
@@ -24,13 +31,7 @@ describe('CreateUser', () => {
     });
 
     it('Should be not to create a user that was already been created', async () => {
-        const fakeUsersRepository = new FakeUsersRepository();
-        const fakeHashProvider = new FakeHashProvider();
-
-        const createUser = new CreateUserService(
-            fakeUsersRepository,
-            fakeHashProvider
-        );
+    
         const email = 'gio@gmail.com';
 
         await createUser.execute({
@@ -46,6 +47,5 @@ describe('CreateUser', () => {
                 password: '123',
             })).rejects.toBeInstanceOf(AppError);
     });
-
     
 });

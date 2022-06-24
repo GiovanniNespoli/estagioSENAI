@@ -2,20 +2,25 @@ import CreateAppointmentService from "./CreateAppointmentService";
 import FakeAppointmentsRepository from "../repositories/fakes/FakeAppointmentsRepositoriy";
 import AppError from "@shared/errors/AppError";
 
+let fakeAppointmentsRepositoriy: FakeAppointmentsRepository;
+let createAppointment: CreateAppointmentService;  
+
 //Teste unitário depende dele mesmo 
 
 //describe -> descreve sobre oq será feita os appointments
 describe('CreateAppointment', () => {
+
+    beforeEach(() => {
+        fakeAppointmentsRepositoriy = new FakeAppointmentsRepository();
+        createAppointment = new CreateAppointmentService(
+         fakeAppointmentsRepositoriy,
+         );
+    });
     
     //it -> podemos passar uma forma de descrição sobre o teste
     it('should be able to create a new appointment', async () => {
 
         //teste
-       const fakeAppointmentsRepositoriy = new FakeAppointmentsRepository();
-       const createAppointment = new CreateAppointmentService(
-        fakeAppointmentsRepositoriy,
-        );
-
        const appointment = await createAppointment.execute({
         date: new Date(),
         provider_id: "111111",
@@ -26,12 +31,7 @@ describe('CreateAppointment', () => {
     });
 
     it('Should not be able to create same appointments that is already exist', async () => {
-        const fakeAppointmentsRepositoriy = new FakeAppointmentsRepository();
-
-        const createAppointment = new CreateAppointmentService(
-            fakeAppointmentsRepositoriy,
-        );
-
+        
         const appointmentDate = new Date(2020, 4, 10, 14);
 
          await createAppointment.execute({

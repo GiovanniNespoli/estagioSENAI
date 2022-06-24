@@ -1,11 +1,21 @@
-import nodemailer, { Transporter } from 'nodemailer'
-import IMailProvider from "../models/IMailProvider";
+import nodemailer, { Transporter } from 'nodemailer';
+import { inject, injectable } from 'tsyringe';
 
+
+import ISendMailDTO from '../dtos/ISendEmailDTO';
+import IMailProvider from "../models/IMailProvider";
+import IMailTemplateProvider from '../../MailTemplateProvider/models/IMailTemplateProvider';
+
+@injectable()
 export default class ETheralMailProvider implements IMailProvider {
 
     private client: Transporter;
 
-    constructor() {
+    constructor(
+
+        @inject('MailTemplateProvider')
+        private mailTemplateProvider : IMailTemplateProvider,
+    ) {
         nodemailer.createTestAccount().then(account => {
 
             // console.log('aaaaaaa')
@@ -25,13 +35,19 @@ export default class ETheralMailProvider implements IMailProvider {
         });
     }
 
-    public async sendMail(to: string, body: string): Promise<undefined> {
+    public async sendMail({to, from, subject, templateData}: ISendMailDTO): Promise<undefined> {
 
         const message = await this.client.sendMail({
-            from: 'Equipe GoBarber <equipe@gobarber.com.br>', // sender address
-            to, // list of receivers
+            from: {
+                name: from?.name || 'Equipe GoBarber',
+                address: from?.email || 'equipe@gobarber.com.br' 
+            }, // sender address
+            to: {
+                name: to.name,
+                address: to.email,
+            }, // list of receivers
             subject: "Recuperação de senha", // Subject line
-            text: body, // plain text body
+            html: await this.mailTemplateProvider.parse(templateData ) // plain text body
         });
 
         console.log(message)
