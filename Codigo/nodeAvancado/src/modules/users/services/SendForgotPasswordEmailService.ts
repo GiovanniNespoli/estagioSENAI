@@ -46,6 +46,7 @@ export default class SendForgotPasswordEmailService {
                 variables: {
                     name: checkUserExists.name,
                     link: `http://localhost/reset_password?token=${token}`,
+                    token,
                 },
             },
         });

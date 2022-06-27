@@ -1,5 +1,5 @@
 import AppError from "@shared/errors/AppError";
-import { inject } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 import Users from "../infra/typeorm/entities/user";
 import IUsersRepository from "../repositories/IUsersRepository"
 
@@ -7,6 +7,7 @@ interface IRequest {
     user_id: string;
 }
 
+@injectable()
 export default class ShowProfileService {
     constructor(
         @inject('UsersRepository')
@@ -22,4 +23,4 @@ export default class ShowProfileService {
 
         return user;
     }
-}
+} 

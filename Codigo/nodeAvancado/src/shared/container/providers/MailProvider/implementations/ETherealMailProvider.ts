@@ -29,8 +29,6 @@ export default class ETheralMailProvider implements IMailProvider {
                 },
             });
 
-            console.log(account);
-
             this.client = transporter;
         });
     }
