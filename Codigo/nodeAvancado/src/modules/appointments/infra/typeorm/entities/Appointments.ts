@@ -1,10 +1,12 @@
-import {    Entity, 
-            Column,
-            PrimaryGeneratedColumn, 
-            CreateDateColumn, 
-            UpdateDateColumn, 
-            ManyToOne,
-            JoinColumn  } from "typeorm";
+import {
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    CreateDateColumn,
+    UpdateDateColumn,
+    ManyToOne,
+    JoinColumn
+} from "typeorm";
 
 // interface AppointmentInterface
 // {
@@ -16,7 +18,7 @@ import {    Entity,
 import User from '../../../../users/infra/typeorm/entities/user';
 
 @Entity('appointments') //decoreitor => apenas no typeScript
-export default class Appointment{
+export default class Appointment {
 
     @PrimaryGeneratedColumn('uuid')
     id: string;
@@ -25,8 +27,15 @@ export default class Appointment{
     provider_id: string;
 
     @ManyToOne(() => User)
-    @JoinColumn({name : 'provider_id'})
+    @JoinColumn({ name: 'provider_id' })
     provider: User;
+
+    @Column()
+    user_id: string;
+
+    @ManyToOne(() => User)
+    @JoinColumn({ name: 'user_id' })
+    user: User;
 
     @Column('timestamp with time zone')
     date: Date;
@@ -36,5 +45,5 @@ export default class Appointment{
 
     @UpdateDateColumn()
     updated_at: Date;
-    
+
 }
