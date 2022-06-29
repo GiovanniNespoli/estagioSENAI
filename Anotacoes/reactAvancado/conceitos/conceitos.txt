@@ -1,0 +1,3 @@
+Criar pasta STYLES para outras cofigurações de estilos como Dark e light mode ou até mesmo THEMES
+
+<> </> == encapsular o component
