@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import 'express-async-errors';
 import 'reflect-metadata';
+import cors from 'cors';
 
 import uploadConfig from '@config/upload';
 import routes from "./routes";
@@ -12,6 +13,7 @@ import '@shared/container';
 
 const app = express();
 
+app.use(cors()); //evita sites q n sejam confiaveis da nossa aplicação acessem nosso site
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadFolder))
 app.use(routes);

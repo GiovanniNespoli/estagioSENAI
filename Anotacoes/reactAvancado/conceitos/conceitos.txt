@@ -1,3 +1,20 @@
 Criar pasta STYLES para outras cofigurações de estilos como Dark e light mode ou até mesmo THEMES
 
 <> </> == encapsular o component
+
+Estado => Toda vez em que um estado sofre uma alteração um componente que esta
+recebendo a informação atualiza
+
+LEI DO REACT 😎😎😎
+
+por conta de toda vez q o estado sofre uma ação ele é renderizado novamente,
+quando chamamos uma função que está renderizando o nosso cod por exemplo :
+
+const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
+
+acaba que está outra função criada é renderizada novamente toda vez em que o
+estado sofre uma alteração e quardando a alteração na memória fazendo com que
+a nossa aplicação fique mais lenta.
+
+então usamos a função useCallBack(), [x] => só vai recriar a função quando a
+variavel x tiver uma alteração 

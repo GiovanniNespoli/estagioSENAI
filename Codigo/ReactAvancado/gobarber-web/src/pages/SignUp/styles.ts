@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { shade } from "polished"
 
-import goBarberLogin from '../../assets/goBarberLogin.png'
+import goBarberCadastro from '../../assets/goBarberCadastro.png'
 
 
 export const Container = styled.div`
@@ -43,7 +43,7 @@ export const Content = styled.div`
     }
     }
     > a {
-        color: #ff9000;
+        color: #F4EDEB;
         display: block;
         margin-top: 24px;
         text-decoration: none;
@@ -58,6 +58,6 @@ export const Content = styled.div`
 `;
 export const Background = styled.div`
     flex: 1;
-    background: url(${goBarberLogin}) no-repeat center;
+    background: url(${goBarberCadastro}) no-repeat center;
     background-size: cover;
 `;
