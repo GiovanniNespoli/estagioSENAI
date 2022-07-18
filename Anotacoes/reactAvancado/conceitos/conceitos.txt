@@ -18,3 +18,12 @@ a nossa aplicação fique mais lenta.
 
 então usamos a função useCallBack(), [x] => só vai recriar a função quando a
 variavel x tiver uma alteração 
+
+Hooks : Hooks são funções que permitem a você “ligar-se” aos recursos de state 
+e ciclo de vida do React a partir de componentes funcionais. 
+Hooks não funcionam dentro de classes — eles permitem que você use React sem classes
+
+ciclo de vida: Conceito. Os ciclos de vida têm o objetivo de destruir componentes 
+que não estão sendo utilizados. Dessa forma, podemos garantir que os recursos serão alocados 
+somente nos componentes em uso. Por essa razão, cada componente possui um ciclo de vida, 
+que vai da fase de montagem até a fase de desmontagem (destruição)
