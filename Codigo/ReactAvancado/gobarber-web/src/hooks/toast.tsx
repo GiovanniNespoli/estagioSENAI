@@ -27,7 +27,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
      * OMIT -> usado para definir a tipagem, ou seja terá todas as tipagens de tal interface menos a passada em ''
      * usamos uuid em um toast já que podemos ter mais de um toast aparecendo na pag
      */
-    const addToast = useCallback(({type, title, description}: Omit<ToastMessage, 'id'>) => {
+    const addToast = useCallback(({ type, title, description }: Omit<ToastMessage, 'id'>) => {
         const id = uuid();
 
         const toast = {
@@ -37,12 +37,13 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             description
         };
 
-        /*  outra forma de preencher o array n quebrando o conceito de imutabilidade
+        /*  
+            outra forma de preencher o array n quebrando o conceito de imutabilidade,
             quando passamos uma função no setMessages ele vai retornar os valores antigos
         */
         setMessages((state) => [...state, toast]);
     },
-    [],
+        [],
     );
 
     //para removermos temos q pegar o id para deletar 
@@ -51,10 +52,10 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         setMessages(state => state.filter(message => message.id !== id))
     }, []);
 
-    return(
-        <ToastContext.Provider value={{addToast, removeToast}}>
+    return (
+        <ToastContext.Provider value={{ addToast, removeToast }}>
             {children}
-        <ToastContainer messages={messages}/>
+            <ToastContainer messages={messages} />
         </ToastContext.Provider>
     );
 }
