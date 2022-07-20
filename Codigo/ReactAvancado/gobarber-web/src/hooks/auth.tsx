@@ -7,6 +7,12 @@ interface AuthState {
     user: object;
 }
 
+interface User {
+    id: string;
+    name: string;
+    avatar_url: string;
+}
+
 interface AuthContextData {
     user: object;
     signIn(credential: SignInCredentials): Promise<void>,
@@ -24,6 +30,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     const [data, setData] = useState<AuthState>(() => {
+
         const token = localStorage.getItem('@GoBarber:token');
         const user = localStorage.getItem('@GoBarber:user');
 

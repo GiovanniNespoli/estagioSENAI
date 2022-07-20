@@ -6,7 +6,6 @@ import { FormHandles } from "@unform/core";
 import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom"; //para fazer a navegação
 
-import { useAuth } from "../../hooks/auth";
 import { useToast } from "../../hooks/toast";
 import getValidationErrors from "../../utils/getValidationErrors";
 
@@ -19,16 +18,13 @@ import Button from "../../components/Button";
 
 import { Container, Content, Background, AnimationContainer } from "./styles";
 
-interface SignInFormData {
+interface ForgotPasswordFormData {
     email: string,
-    password: string
 }
 
-const SignIn: React.FC = () => {
+const ForgotPassword: React.FC = () => {
 
     const formRef = useRef<FormHandles>(null);
-    const { signIn, user } = useAuth();
-    console.log(user);
     const hisotry = useHistory();
 
     const { addToast } = useToast();
@@ -39,22 +35,16 @@ const SignIn: React.FC = () => {
         }, 2000);
     }, []);
 
-    const handleSubmit = useCallback(async (data: SignInFormData) => {
+    const handleSubmit = useCallback(async (data: ForgotPasswordFormData) => {
         try {
             formRef.current?.setErrors({});
 
             const schema = Yup.object().shape({
                 email: Yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'),
-                password: Yup.string().required('Senha obrigatoria'),
             });
 
             await schema.validate(data, { abortEarly: false });
 
-            await signIn({
-                email: data.email,
-                password: data.password
-            });
-            hisotry.push('/dashboard');
 
         } catch (err) {
 
@@ -70,13 +60,11 @@ const SignIn: React.FC = () => {
             // disparar um toast
             addToast({
                 type: 'error',
-                title: 'Erro na autenticação',
-                description: 'Ocorrou um erro ao fazer o login, cheque as credenciais',
+                title: 'Erro na recuperação de senha.',
+                description: 'Ocorrou um erro ao fazer ao tentar recuperar a senha.',
             });
-
-            console.log('aaa')
         }
-    }, [signIn, addToast]);
+    }, [addToast]);
 
     return (
         <Container>
@@ -85,18 +73,15 @@ const SignIn: React.FC = () => {
                     <img src={logoImg} alt="Logo gobarber" />
 
                     <Form ref={formRef} onSubmit={handleSubmit}>
-                        <h1>Faça seu logon</h1>
+                        <h1>Recuperar senha</h1>
 
                         <Input name="email" icon={FiMail} placeholder="E-mail" />
-                        <Input name="password" icon={FiLock} type="password" placeholder="Senha" />
-                        <Button type="submit" onClick={forceUpdate}>Entrar</Button>
-
-                        <Link to='/forgotPassword'>Esqueci a minha senha</Link>
+                        <Button type="submit" onClick={forceUpdate}>Recuperar</Button>
                     </Form>
 
-                    <Link to="/signup" onClick={forceUpdate}>
+                    <Link to="/" onClick={forceUpdate}>
                         <FiLogIn />
-                        Criar conta
+                        Voltar ao login
                     </Link>
                 </AnimationContainer>
             </Content>
@@ -107,4 +92,4 @@ const SignIn: React.FC = () => {
 
 
 
-export default SignIn;
+export default ForgotPassword;
