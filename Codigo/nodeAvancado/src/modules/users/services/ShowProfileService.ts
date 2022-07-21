@@ -11,15 +11,18 @@ interface IRequest {
 export default class ShowProfileService {
     constructor(
         @inject('UsersRepository')
-        private usersRepository : IUsersRepository,
-    ){}
-    
-    public async execute({user_id}: IRequest): Promise<Users>{
+        private usersRepository: IUsersRepository,
+    ) { }
+
+    public async execute({ user_id }: IRequest): Promise<Users> {
         const user = await this.usersRepository.findById(user_id);
 
-        if(!user) {
+        if (!user) {
             throw new AppError('User not found');
         }
+
+        console.log(user);
+        console.log(user.getAvatar());
 
         return user;
     }

@@ -57,3 +57,9 @@ export const Profile = styled.div`
         color: #ff9000;
     }
 `;
+
+export const Content = styled.div``;
+
+export const Schedule = styled.div``;
+
+export const Calendar = styled.div``;

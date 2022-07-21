@@ -1,15 +1,15 @@
 import React from "react";
 import { FiPower } from "react-icons/fi";
 
-import { Container, Header, HeaderContent, Profile } from "./styles";
+import { Container, Header, HeaderContent, Profile, Content, Schedule, Calendar } from "./styles";
 import { useAuth } from "../../hooks/auth";
 
 import logoImg from '../../assets/Logo.svg';
-import perfil from '../../assets/gigio.png';
 
 const Dashboard: React.FC = () => {
     const { signOut, user } = useAuth();
-    console.log(user)
+    console.log(user);
+    console.log(user.avatar);
 
     return (
         <Container>
@@ -18,10 +18,10 @@ const Dashboard: React.FC = () => {
                 <img src={logoImg} alt="GoBarber" />
 
                 <Profile>
-                    <img src={perfil} alt="Imagem de Perfil" />
+                    <img src={user.avatar} alt="Imagem de Perfil" />
                     <div>
                         <span>Bem vindo,</span>
-                        <strong>Giovanni Nespolindo</strong>
+                        <strong>{user.name}</strong>
                     </div>
                 </Profile>
 
@@ -30,6 +30,11 @@ const Dashboard: React.FC = () => {
                 </button>
             </HeaderContent>
         </Header>
+
+        <Content>
+            <Schedule></Schedule>
+            {/* <Calenar/> */}
+        </Content>
     </Container>
     );
 };

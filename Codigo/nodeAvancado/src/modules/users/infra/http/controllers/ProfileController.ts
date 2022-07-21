@@ -1,12 +1,14 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe';
+
+import { classToClass } from 'class-transformer';
+
 import UpdateProfileService from '@modules/users/services/UpdateProfileService';
 import ShowProfileService from '@modules/users/services/ShowProfileService';
 
 export default class PerfilController {
     public async show(request: Request, response: Response): Promise<Response> {
         const user_id = request.user.id;
-        console.log(user_id);
 
         const showProfile = await container.resolve(ShowProfileService);
 
@@ -30,6 +32,6 @@ export default class PerfilController {
             old_password
         });
 
-        return response.json(user)
+        return response.json(classToClass(user));
     }
 }
