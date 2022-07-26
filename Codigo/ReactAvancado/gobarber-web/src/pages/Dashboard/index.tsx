@@ -22,6 +22,7 @@ import { useAuth } from "../../hooks/auth";
 import logoImg from '../../assets/Logo.svg';
 import userImg from '../../assets/gigio.png';
 import api from "../../services/api";
+import { parseISO } from "date-fns/esm";
 
 interface MonthAvailabilityItem {
     day: number;
@@ -31,6 +32,7 @@ interface MonthAvailabilityItem {
 interface Appointment {
     id: string,
     date: string,
+    hourFormatted: string,
     user: {
         name: string,
         avatar_url: string
@@ -46,7 +48,7 @@ const Dashboard: React.FC = () => {
 
     const [monthAvailability, setMonthAvailability] = useState<MonthAvailabilityItem[]>([]);
 
-    const [appointments, setAppointments] = useState([]);
+    const [appointments, setAppointments] = useState<Appointment[]>([]);
     //Mudar quando o usuario seleciona uma data
     // useCallBack -> retorna uma função
     const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
@@ -76,20 +78,24 @@ const Dashboard: React.FC = () => {
 
     //vai listar os agendamentos do dia em q o usuario selecionar!! ( alteração da variavel do dia )
     useEffect(() => {
-        api.get('/appointments/me', {
+        api.get<Appointment[]>('/appointments/me', {
             params: {
                 year: selectedDate.getFullYear(),
                 month: selectedDate.getMonth() + 1,
                 day: selectedDate.getDate(),
             }
         }).then(response => {
-            setAppointments(response.data);
-        });
-    }, []);
+            const app = response.data.map(appointment => {
+                return {
+                    ...appointment,
+                    hourFormatted: format(parseISO(appointment.date), 'HH:mm')
+                }
+            })
 
-    useEffect(() => {
-        api.get('')
-    }, [selectedDate])
+            setAppointments(response.data);
+            console.log(appointments)
+        });
+    }, [selectedDate]);
 
     //useMemo -> memoriza um valor específico e 
     //dizemos pra ele quando o valor deve ser recarregado
@@ -113,7 +119,19 @@ const Dashboard: React.FC = () => {
 
     const selectedWeekDay = useMemo(() => {
         return format(selectedDate, 'cccc', { locale: ptBR });
-    }, [selectedDate])
+    }, [selectedDate]);
+
+    const morningAppointments = useMemo(() => {
+        return appointments.filter(app => {
+            return parseISO(app.date).getHours() < 12;
+        });
+    }, [appointments]);
+
+    const afternoonAppointments = useMemo(() => {
+        return appointments.filter(app => {
+            return parseISO(app.date).getHours() >= 12;
+        });
+    }, [appointments]);
 
     return (
         <Container>
@@ -160,30 +178,20 @@ const Dashboard: React.FC = () => {
                     <Section>
                         <strong>Manhã</strong>
 
-                        <Appointment>
-                            <span>
-                                <FiClock />
-                                08:00
-                            </span>
+                        {morningAppointments.map(appointments => (
+                            <Appointment>
+                                <span>
+                                    <FiClock />
+                                    {}
+                                </span>
 
-                            <div>
-                                <img src={userImg} alt="Gigio" />
+                                <div>
+                                    <img src={appointments.user.avatar_url} alt="Imagem de perfil" />
 
-                                <strong>Giovanni Nespolindo</strong>
-                            </div>
-                        </Appointment>
-                        <Appointment>
-                            <span>
-                                <FiClock />
-                                08:00
-                            </span>
-
-                            <div>
-                                <img src={userImg} alt="Gigio" />
-
-                                <strong>Giovanni Nespolindo</strong>
-                            </div>
-                        </Appointment>
+                                    <strong>{appointments.user.name}</strong>
+                                </div>
+                            </Appointment>
+                        ))}
                     </Section>
 
                     <Section>

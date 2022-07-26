@@ -21,7 +21,8 @@ class ListProviderMonthAvailabilityService {
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider,
   ) {
-
+    this.appointmentsRepository = appointmentsRepository;
+    this.cacheProvider = cacheProvider;
   }
 
   public async execute({
@@ -49,6 +50,9 @@ class ListProviderMonthAvailabilityService {
         value: classToClass(appointments),
       });
     }
+
+    console.log(appointments);
+    
 
     return appointments;
   }
