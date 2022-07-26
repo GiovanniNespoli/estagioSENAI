@@ -28,6 +28,15 @@ interface MonthAvailabilityItem {
     available: boolean;
 }
 
+interface Appointment {
+    id: string,
+    date: string,
+    user: {
+        name: string,
+        avatar_url: string
+    }
+}
+
 const Dashboard: React.FC = () => {
     const { signOut, user } = useAuth();
 
@@ -36,6 +45,8 @@ const Dashboard: React.FC = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
 
     const [monthAvailability, setMonthAvailability] = useState<MonthAvailabilityItem[]>([]);
+
+    const [appointments, setAppointments] = useState([]);
     //Mudar quando o usuario seleciona uma data
     // useCallBack -> retorna uma função
     const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
@@ -63,10 +74,22 @@ const Dashboard: React.FC = () => {
         });
     }, [currentMonth, user.id]);
 
+    //vai listar os agendamentos do dia em q o usuario selecionar!! ( alteração da variavel do dia )
+    useEffect(() => {
+        api.get('/appointments/me', {
+            params: {
+                year: selectedDate.getFullYear(),
+                month: selectedDate.getMonth() + 1,
+                day: selectedDate.getDate(),
+            }
+        }).then(response => {
+            setAppointments(response.data);
+        });
+    }, []);
 
     useEffect(() => {
         api.get('')
-    },[selectedDate])
+    }, [selectedDate])
 
     //useMemo -> memoriza um valor específico e 
     //dizemos pra ele quando o valor deve ser recarregado
@@ -89,7 +112,7 @@ const Dashboard: React.FC = () => {
     }, [selectedDate]);
 
     const selectedWeekDay = useMemo(() => {
-        return format(selectedDate, 'cccc', { locale: ptBR});
+        return format(selectedDate, 'cccc', { locale: ptBR });
     }, [selectedDate])
 
     return (
@@ -116,7 +139,7 @@ const Dashboard: React.FC = () => {
                 <Schedule>
                     <h1>Horários agendados</h1>
                     <p>
-                        <span>{isToday(selectedDate) && 'Hoje'}</span>
+                        {isToday(selectedDate) && <span>Hoje</span>}
                         <span>{selectedDateAsText}</span>
                         <span>{selectedWeekDay}</span>
                     </p>

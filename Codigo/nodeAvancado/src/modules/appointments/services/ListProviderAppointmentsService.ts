@@ -14,19 +14,14 @@ interface IRequest {
 
 @injectable()
 class ListProviderMonthAvailabilityService {
-  private appointmentsRepository: IAppointmentsRepository;
-
-  private cacheProvider: ICacheProvider;
-
   constructor(
     @inject('AppointmentsRepository')
-    appointmentsRepository: IAppointmentsRepository,
+    private appointmentsRepository: IAppointmentsRepository,
 
     @inject('CacheProvider')
-    cacheProvider: ICacheProvider,
+    private cacheProvider: ICacheProvider,
   ) {
-    this.appointmentsRepository = appointmentsRepository;
-    this.cacheProvider = cacheProvider;
+
   }
 
   public async execute({
@@ -40,7 +35,7 @@ class ListProviderMonthAvailabilityService {
     );
 
     if (!appointments) {
-      appointments = await this.appointmentsRepository.findAllInDayFromProvider(
+      appointments = await this.appointmentsRepository.findAllinDayFromProvider(
         {
           provider_id,
           day,
