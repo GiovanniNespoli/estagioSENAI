@@ -42,10 +42,10 @@ export default class Users {
 
         switch (storageConfig.driver) {
             case 'disk':
-                return `${APP_API_URL}/files/${this.avatar}`;
+                return `${APP_API_URL}/files/${this.avatar}`;       
             default:
                 return null;
-        }
+        };
     }
 
 }

@@ -5,7 +5,7 @@ import IFindAllDayFromProviderDTO from '../dtos/IFindAllinDayFromProviderDTO';
 
 export default interface ITeste{
     create(data: ICreateAppointmentDTO): Promise<Appointment>;
-    findByDate(date : Date): Promise<Appointment | undefined>;
-    findAllinMonthFromProvider(date: IFindAllinMonthFromProviderDTO): Promise<Appointment[]>
-    findAllinDayFromProvider(date: IFindAllDayFromProviderDTO): Promise<Appointment[]>
+    findByDate(data : Date): Promise<Appointment | undefined>;
+    findAllinMonthFromProvider(data: IFindAllinMonthFromProviderDTO): Promise<Appointment[]>
+    findAllinDayFromProvider(data: IFindAllDayFromProviderDTO): Promise<Appointment[]>
 }

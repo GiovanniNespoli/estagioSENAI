@@ -22,7 +22,7 @@ class ProviderAppointmentsController {
 
     console.log(appointments);
 
-    return response.status(200).json(classToClass(appointments));
+    return response.json(classToClass(appointments));
   }
 }
 

@@ -12,7 +12,11 @@ import UserRepository from '@modules/users/infra/typeorm/repositories/UserReposi
 import IUserTokenRepository from '@modules/users/repositories/IUserTokenRepository';
 import UserTokenRepository from '@modules/users/infra/typeorm/repositories/UserTokenRepository';
 
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
+import CacheProvider from '@shared/container/providers/CacheProvider/implementations/RedisCacheProvider';
+
 container.registerSingleton<IUserRepository>('UsersRepository',UserRepository);
 container.registerSingleton<IAppointmentsRepository>('AppointmentsRepository',AppointmentsRepository);
 container.registerSingleton<IUserTokenRepository>('UserTokenRepository',UserTokenRepository);
+container.registerSingleton<ICacheProvider>('CacheProvider', CacheProvider);
 

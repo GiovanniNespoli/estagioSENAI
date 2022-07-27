@@ -23,21 +23,22 @@ import logoImg from '../../assets/Logo.svg';
 import userImg from '../../assets/gigio.png';
 import api from "../../services/api";
 import { parseISO } from "date-fns/esm";
+import { type } from "@testing-library/user-event/dist/type";
 
 interface MonthAvailabilityItem {
     day: number;
     available: boolean;
 }
 
-interface Appointment {
+type Appointment = Array <{
     id: string,
     date: string,
     hourFormatted: string,
     user: {
         name: string,
         avatar_url: string
-    }
-}
+    };
+}>
 
 const Dashboard: React.FC = () => {
     const { signOut, user } = useAuth();
@@ -48,8 +49,8 @@ const Dashboard: React.FC = () => {
 
     const [monthAvailability, setMonthAvailability] = useState<MonthAvailabilityItem[]>([]);
 
-    const [appointments, setAppointments] = useState<Appointment[]>([]);
-    //Mudar quando o usuario seleciona uma data
+    const [appointments, setAppointments] = useState<Appointment>([]);
+
     // useCallBack -> retorna uma função
     const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
         if (modifiers.available) {
@@ -78,7 +79,7 @@ const Dashboard: React.FC = () => {
 
     //vai listar os agendamentos do dia em q o usuario selecionar!! ( alteração da variavel do dia )
     useEffect(() => {
-        api.get<Appointment[]>('/appointments/me', {
+        api.get<Appointment>('/appointments/me', {
             params: {
                 year: selectedDate.getFullYear(),
                 month: selectedDate.getMonth() + 1,
@@ -92,7 +93,7 @@ const Dashboard: React.FC = () => {
                 }
             })
 
-            setAppointments(response.data);
+            setAppointments(app);
             console.log(appointments)
         });
     }, [selectedDate]);
@@ -133,6 +134,10 @@ const Dashboard: React.FC = () => {
         });
     }, [appointments]);
 
+    const nextAppointments = useMemo(() => {
+
+    },[selectedDate, appointments])
+
     return (
         <Container>
             <Header>
@@ -162,7 +167,8 @@ const Dashboard: React.FC = () => {
                         <span>{selectedWeekDay}</span>
                     </p>
 
-                    <NextAppointment>
+                    {isToday(selectedDate) && (
+                        <NextAppointment>
                         <strong>Atendimento a seguir</strong>
                         <div>
                             <img src={userImg} alt="Gigio" />
@@ -175,14 +181,15 @@ const Dashboard: React.FC = () => {
                         </div>
                     </NextAppointment>
 
+                    )}
                     <Section>
                         <strong>Manhã</strong>
 
                         {morningAppointments.map(appointments => (
-                            <Appointment>
+                            <Appointment key={appointments.id}>
                                 <span>
                                     <FiClock />
-                                    {}
+                                    {appointments.user.avatar_url}
                                 </span>
 
                                 <div>
@@ -197,30 +204,20 @@ const Dashboard: React.FC = () => {
                     <Section>
                         <strong>Tarde</strong>
 
-                        <Appointment>
-                            <span>
-                                <FiClock />
-                                08:00
-                            </span>
+                        {afternoonAppointments.map(appointments => (
+                            <Appointment key={appointments.id}>
+                                <span>
+                                    <FiClock />
+                                    {appointments.user.avatar_url}
+                                </span>
 
-                            <div>
-                                <img src={userImg} alt="Gigio" />
+                                <div>
+                                    <img src={appointments.user.avatar_url} alt="Imagem de perfil" />
 
-                                <strong>Giovanni Nespolindo</strong>
-                            </div>
-                        </Appointment>
-                        <Appointment>
-                            <span>
-                                <FiClock />
-                                08:00
-                            </span>
-
-                            <div>
-                                <img src={userImg} alt="Gigio" />
-
-                                <strong>Giovanni Nespolindo</strong>
-                            </div>
-                        </Appointment>
+                                    <strong>{appointments.user.name}</strong>
+                                </div>
+                            </Appointment>
+                        ))}
                     </Section>
                 </Schedule>
                 <Calendar>

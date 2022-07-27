@@ -35,6 +35,7 @@ export default class AppointmentsRepository implements IAppointmentRepository {
                 date: Raw(dateFielName =>
                     `to_char(${dateFielName}, 'MM-YYYY') = '${parsedMonth}-${year}'`),
             },
+            relations: ['user']
         });
 
         return appointments;
@@ -58,6 +59,7 @@ export default class AppointmentsRepository implements IAppointmentRepository {
                 date: Raw(dateFielName =>
                     `to_char(${dateFielName}, ' DD-MM-YYYY') = '${parsedDay}-${parsedMonth}-${year}'`),
             },
+            relations: ['user']
         });
 
         return appointments;

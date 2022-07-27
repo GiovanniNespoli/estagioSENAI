@@ -22,14 +22,19 @@ export default function ensureAuthenticated(request: Request, response: Response
     //Desestruturou o array, assim oq for separado pelo slip vai estar dentro dos obj do array
     const [, token] = authHeader.split(' ');
 
-    const decoded = verify(token, authConfig.jwt.secret);
+    try {
+        const decoded = verify(token, authConfig.jwt.secret);
 
-    const { sub } = decoded as TokenPayload;
+        const { sub } = decoded as TokenPayload;
 
-    request.user = {
-        id: sub,
-    };
+        // Expose user object inside request
+        request.user = {
+            id: sub,
+        };
 
-    return next();
+        return next();
+    } catch {
+        throw new AppError('Invalid JWT token.', 401);
+    }
 
 }

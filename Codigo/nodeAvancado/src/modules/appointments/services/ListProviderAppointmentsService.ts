@@ -20,10 +20,7 @@ class ListProviderMonthAvailabilityService {
 
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider,
-  ) {
-    this.appointmentsRepository = appointmentsRepository;
-    this.cacheProvider = cacheProvider;
-  }
+  ) { }
 
   public async execute({
     provider_id,
@@ -31,11 +28,20 @@ class ListProviderMonthAvailabilityService {
     month,
     year,
   }: IRequest): Promise<Appointment[]> {
-    let appointments = await this.cacheProvider.recover<Appointment[]>(
-      `provider-appointments:${provider_id}:${day}-${month}-${year}`,
+    const cacheKey = `provider-appointments:${provider_id}:${year}-${month}-${day}`;
+
+    let appointments = await this.appointmentsRepository.findAllinDayFromProvider(
+      {
+        provider_id,
+        day,
+        month,
+        year,
+      },
     );
 
-    if (!appointments) {
+/*     if (!!!appointments?.length) {
+      console.log("entrei");
+
       appointments = await this.appointmentsRepository.findAllinDayFromProvider(
         {
           provider_id,
@@ -45,14 +51,10 @@ class ListProviderMonthAvailabilityService {
         },
       );
 
-      await this.cacheProvider.save({
-        key: `provider-appointments:${provider_id}:${day}-${month}-${year}`,
-        value: classToClass(appointments),
-      });
-    }
+      await this.cacheProvider.save({ key: cacheKey, value: classToClass(appointments) });
+    } */
 
     console.log(appointments);
-    
 
     return appointments;
   }
