@@ -9,6 +9,8 @@ class ProviderAppointmentsController {
     const { id: provider_id } = request.user;
     const { day, month, year } = request.query;
 
+    console.log(provider_id, day, month, year);
+
     const listProviderAppointments = container.resolve(
       ListProviderAppointmentsService,
     );

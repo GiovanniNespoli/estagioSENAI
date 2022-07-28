@@ -6,12 +6,28 @@ import Appointment from "@modules/appointments/infra/typeorm/entities/Appointmen
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
 import IFindAllInMonthFromProviderDTO from '@modules/appointments/dtos/IFindAllInMonthFromProviderDTO';
 import IFindAllinDayFromProviderDTO from '@modules/appointments/dtos/IFindAllinDayFromProviderDTO';
+import IFindUserDTO from '@modules/appointments/dtos/IFindUserDTO';
 
 export default class AppointmentsRepository implements IAppointmentRepository {
     private ormRepository: Repository<Appointment>;
 
     constructor() {
         this.ormRepository = getRepository(Appointment);
+    }
+
+
+    public async findUser({ user_id }: IFindUserDTO): Promise<Appointment[]> {
+        const findUser = await this.ormRepository.find({
+            relations:['user', 'provider'],
+            where: {
+                user_id: user_id,
+            },
+            order: {
+                date: "DESC",
+            },
+        });
+
+        return findUser
     }
     /**
      * Toda vez em que criamos uma função async await
@@ -61,6 +77,8 @@ export default class AppointmentsRepository implements IAppointmentRepository {
             },
             relations: ['user']
         });
+
+        console.log(appointments);
 
         return appointments;
     }

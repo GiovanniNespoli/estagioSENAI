@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { isToday, format } from 'date-fns';
-import ptBR from "date-fns/esm/locale/pt-BR";
+import { isToday, format, isAfter } from 'date-fns';
 import { FiClock, FiPower } from "react-icons/fi";
 import DayPicker, { DayModifiers } from "react-day-picker";
+
+import ptBR from "date-fns/esm/locale/pt-BR";
 import 'react-day-picker/lib/style.css';
 
 import {
@@ -20,24 +21,24 @@ import {
 import { useAuth } from "../../hooks/auth";
 
 import logoImg from '../../assets/Logo.svg';
-import userImg from '../../assets/gigio.png';
 import api from "../../services/api";
 import { parseISO } from "date-fns/esm";
-import { type } from "@testing-library/user-event/dist/type";
+import moment from "moment";
 
 interface MonthAvailabilityItem {
     day: number;
     available: boolean;
 }
 
-type Appointment = Array <{
+type Appointment = Array<{
     id: string,
     date: string,
     hourFormatted: string,
     user: {
         name: string,
-        avatar_url: string
-    };
+        email: string,
+        avatar_url: string,
+    }
 }>
 
 const Dashboard: React.FC = () => {
@@ -85,17 +86,16 @@ const Dashboard: React.FC = () => {
                 month: selectedDate.getMonth() + 1,
                 day: selectedDate.getDate(),
             }
-        }).then(response => {
-            const app = response.data.map(appointment => {
-                return {
-                    ...appointment,
-                    hourFormatted: format(parseISO(appointment.date), 'HH:mm')
-                }
-            })
+        } ).then(response => {
+                const appFormated = response.data.map(app => {
+                   return {
+                    ...app,
+                    hourFormatted: format(parseISO(app.date), 'HH:mm'),
+                   }
+                });
+                setAppointments(appFormated);
+            });
 
-            setAppointments(app);
-            console.log(appointments)
-        });
     }, [selectedDate]);
 
     //useMemo -> memoriza um valor específico e 
@@ -135,8 +135,9 @@ const Dashboard: React.FC = () => {
     }, [appointments]);
 
     const nextAppointments = useMemo(() => {
-
-    },[selectedDate, appointments])
+        const app = appointments.find(app => moment(`${app.date}`).format('MMMM Do YYYY'));
+        return app;
+    }, [appointments, selectedDate])
 
     return (
         <Container>
@@ -169,33 +170,31 @@ const Dashboard: React.FC = () => {
 
                     {isToday(selectedDate) && (
                         <NextAppointment>
-                        <strong>Atendimento a seguir</strong>
-                        <div>
-                            <img src={userImg} alt="Gigio" />
+                            <strong>Atendimento a seguir</strong>
+                            <div>
+                                <img src="" alt="" />
 
-                            <strong>Giovanni Nespolindo</strong>
-                            <span>
-                                <FiClock />
-                                08:00
-                            </span>
-                        </div>
-                    </NextAppointment>
+                                <strong></strong>
+                                <span>
+                                    <FiClock />
+                                </span>
+                            </div>
+                        </NextAppointment>
 
                     )}
                     <Section>
                         <strong>Manhã</strong>
-
-                        {morningAppointments.map(appointments => (
-                            <Appointment key={appointments.id}>
+                        {morningAppointments.map(app => (
+                            <Appointment key={app.id}>
                                 <span>
                                     <FiClock />
-                                    {appointments.user.avatar_url}
+                                    {app.hourFormatted}
                                 </span>
 
                                 <div>
-                                    <img src={appointments.user.avatar_url} alt="Imagem de perfil" />
+                                    <img alt="Imagem de perfil" />
 
-                                    <strong>{appointments.user.name}</strong>
+                                    <strong>{app.user.name}</strong>
                                 </div>
                             </Appointment>
                         ))}
@@ -208,7 +207,7 @@ const Dashboard: React.FC = () => {
                             <Appointment key={appointments.id}>
                                 <span>
                                     <FiClock />
-                                    {appointments.user.avatar_url}
+                                    {appointments.hourFormatted}
                                 </span>
 
                                 <div>
@@ -217,8 +216,9 @@ const Dashboard: React.FC = () => {
                                     <strong>{appointments.user.name}</strong>
                                 </div>
                             </Appointment>
-                        ))}
+                        ))} 
                     </Section>
+
                 </Schedule>
                 <Calendar>
                     <DayPicker

@@ -34,7 +34,7 @@ export default class Users {
     @UpdateDateColumn()
     updated_at: Date;
 
-    @Expose({ name: 'avatar' })
+    @Expose({ name: 'avatar_url' })
     getAvatar(): string | null {
         if (!this.avatar) {
             return null;
