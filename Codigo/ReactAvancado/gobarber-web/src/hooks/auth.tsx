@@ -5,7 +5,7 @@ import api from '../services/api';
 interface User {
     id: string;
     name: string;
-    avatar: string;
+    avatar_url: string;
     email: string;
 }
 interface AuthState {
@@ -64,6 +64,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const signOut = useCallback(() => {
         localStorage.removeItem('@GoBarber:token');
         localStorage.removeItem('@GoBarber:user');
+        
+        console.log("removido");
 
         return {} as AuthState;
     }, []);

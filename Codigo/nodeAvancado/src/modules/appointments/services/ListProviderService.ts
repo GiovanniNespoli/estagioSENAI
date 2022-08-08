@@ -33,6 +33,8 @@ export default class ListProviderService {
             await this.cacheProvider.save({ key: cacheKey, value: classToClass(users) });
         }
 
+        
+
         return users;
     }
 }

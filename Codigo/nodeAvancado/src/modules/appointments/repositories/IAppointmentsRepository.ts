@@ -9,5 +9,5 @@ export default interface ITeste{
     findByDate(data : Date): Promise<Appointment | undefined>;
     findAllinMonthFromProvider(data: IFindAllinMonthFromProviderDTO): Promise<Appointment[]>;
     findAllinDayFromProvider(data: IFindAllDayFromProviderDTO): Promise<Appointment[]>;
-    findUser({user_id}: IFindUserDTO): Promise<Appointment[]>;
+    findUser(data: IFindUserDTO): Promise<Appointment[]>;
 }

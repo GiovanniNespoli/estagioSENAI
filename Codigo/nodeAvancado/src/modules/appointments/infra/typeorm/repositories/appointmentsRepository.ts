@@ -16,11 +16,18 @@ export default class AppointmentsRepository implements IAppointmentRepository {
     }
 
 
-    public async findUser({ user_id }: IFindUserDTO): Promise<Appointment[]> {
+    public async findUser({ user_id, year, month, day }: IFindUserDTO): Promise<Appointment[]> {
+
+        const parsedDay = String(day).padStart(2, '0');
+        const parsedMonth = String(month).padStart(2, '0');
+
         const findUser = await this.ormRepository.find({
-            relations:['user', 'provider'],
+
+            relations: ['user', 'provider'],
             where: {
                 user_id: user_id,
+                date: Raw(dateFieldName =>
+                    `to_char(${dateFieldName}, 'DD-MM-YYYY') = '${parsedDay}-${parsedMonth}-${year}'`),
             },
             order: {
                 date: "DESC",
@@ -29,6 +36,7 @@ export default class AppointmentsRepository implements IAppointmentRepository {
 
         return findUser
     }
+
     /**
      * Toda vez em que criamos uma função async await
      * o retorno vira uma promise => Promise<Appointments | null>
@@ -73,7 +81,7 @@ export default class AppointmentsRepository implements IAppointmentRepository {
             where: {
                 provider_id,
                 date: Raw(dateFielName =>
-                    `to_char(${dateFielName}, ' DD-MM-YYYY') = '${parsedDay}-${parsedMonth}-${year}'`),
+                    `to_char(${dateFielName}, 'DD-MM-YYYY') = '${parsedDay}-${parsedMonth}-${year}'`),
             },
             relations: ['user']
         });
