@@ -4,8 +4,8 @@ import DayPicker, { DayModifiers } from 'react-day-picker';
 import { format, isAfter, isToday, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import 'react-day-picker/lib/style.css';
-
 import { FiClock, FiPower } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 import {
     Container,
@@ -18,6 +18,7 @@ import {
     Calendar,
     Section,
     Appointment,
+    CreateAppointment,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 import LogoImg from '../../assets/Logo.svg';
@@ -59,6 +60,10 @@ const Dashboard: React.FC = () => {
 
     const handleMonthChange = useCallback((month: Date) => {
         setCurrentMonth(month);
+    }, []);
+
+    const navigationToCreate = useCallback(() => {
+        
     }, []);
 
     const disabledDays = useMemo(() => {
@@ -152,7 +157,7 @@ const Dashboard: React.FC = () => {
             </Header>
             <Content>
                 <Schedule>
-                    <h1>Horários agendados</h1>
+                    <h1>Horários agendados<CreateAppointment><a href='/ForgotPassword'>Agendar um horário</a></CreateAppointment></h1>
                     <p>
                         {isToday(selectedDate) && <span>Hoje</span>}
                         <span>{selectedDateAsText}</span>

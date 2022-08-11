@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { shade } from "polished";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
 `;
@@ -72,6 +73,7 @@ export const Schedule = styled.div`
 
     h1 {
         font-size: 36px;
+
     }
 
     p {
@@ -214,11 +216,11 @@ export const Appointment = styled.div`
 export const Calendar = styled.aside`
 
     width: 380px;
-
+    
     .DayPicker {
-    background: #28262e;
-    border-radius: 10px;
-  }
+        background: #28262e;
+        border-radius: 10px;
+    }
   .DayPicker-wrapper {
     padding-bottom: 0;
   }
@@ -256,5 +258,26 @@ export const Calendar = styled.aside`
     border-radius: 10px;
     color: #232129 !important;
   }
-`;  
+`;
+
+export const CreateAppointment = styled.button`
+
+    width: 30%;
+    height: 30px;
+    margin-left: 100px;
+    
+    border: none;
+    border-radius: 6px;
+
+    background-color: #ff9000;
+    transition: 0.5s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+    a {
+        text-decoration: none;
+    }
+`;
 
