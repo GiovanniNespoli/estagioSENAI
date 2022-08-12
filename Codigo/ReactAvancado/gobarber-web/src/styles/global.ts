@@ -14,7 +14,7 @@ export default createGlobalStyle`
         -webkit-font-smoothing: antialised;
     }
 
-    border-style, input, button, a {
+    border-style, input, button, a, select {
         font-family: 'Roboto slab';
         font-size: 16px;
         font-weight: 500

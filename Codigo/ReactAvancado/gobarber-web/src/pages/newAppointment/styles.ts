@@ -10,6 +10,7 @@ export const Container = styled.div`
     display: flex;
     align-items: stretch;
     justify-content: space-between;
+
 `;
 
 export const Content = styled.div`
@@ -22,7 +23,18 @@ export const Content = styled.div`
     justify-content: center;
 
     Form {
-        width: 50%
+        width: 50%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+
+        Input {
+            color: #686868;
+        }
+
+        Button {
+            width: 340px;
+        }
     }
 `
 
@@ -35,8 +47,10 @@ export const Header = styled.div`
     span {
         font-size: 30px;
         font-weight: bold;
-    
-        margin-right: 20px;
+    }
+
+    svg {
+        margin-right: 10px;
     }
 
 `
